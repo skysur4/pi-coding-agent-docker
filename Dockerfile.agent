@@ -1,0 +1,19 @@
+FROM ubuntu:latest
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# 필수 도구 및 Python 환경 설치
+RUN apt-get update && apt-get install -y \
+    curl git python3 python3-pip ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# 에이전트 설치
+RUN curl -fsSL https://pi.dev/install.sh | sh
+
+# 작업 디렉토리 설정
+WORKDIR /app/agent
+
+# 에이전트가 실행될 때 필요한 환경 변수나 설정 파일이 있다면 여기에 추가
+# 예: 에이전트가 특정 포트를 열어 대기해야 한다면 관련 설정 필요
+
+CMD ["pi-coding-agent"]
