@@ -15,6 +15,10 @@ RUN apt-get update && apt-get install -y \
     npm \
     && rm -rf /var/lib/apt/lists/*
 
+# Node.js 설치 (공식 저장소를 통해 최신 LTS 버전 설치)
+RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - && \
+    apt-get install -y nodejs
+
 # 작업 디렉토리 설정
 WORKDIR /app
 
@@ -22,8 +26,7 @@ WORKDIR /app
 RUN curl -fsSL https://pi.dev/install.sh | sh
 
 # 4. Pi-Web 패키지 설치
-RUN npm install -g @jmfederico/pi-web
-RUN pi-web install
+RUN curl -fsSL https://raw.githubusercontent.com/jmfederico/pi-web/main/install.sh | sh
 
 # 5. 서비스 실행을 위한 엔트리포인트 스크립트 생성
 # 두 개의 프로세스를 동시에 실행하기 위해 쉘 스크립트를 작성합니다.
