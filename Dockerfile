@@ -22,7 +22,8 @@ WORKDIR /app
 RUN curl -fsSL https://pi.dev/install.sh | sh
 
 # 4. Pi-Web 패키지 설치
-RUN curl -fsSL https://raw.githubusercontent.com/jmfederico/pi-web/main/install.sh | sh
+RUN npm install -g @jmfederico/pi-web
+RUN pi-web install
 
 # 5. 서비스 실행을 위한 엔트리포인트 스크립트 생성
 # 두 개의 프로세스를 동시에 실행하기 위해 쉘 스크립트를 작성합니다.
